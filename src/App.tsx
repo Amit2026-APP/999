@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import {StudentLogin} from './components/components/StudentLogin';
-import {StudentRegister} from './components/components/StudentRegister';
-import {StudentDashboard} from './components/components/StudentDashboard';
-import {TeacherLogin} from './components/components/TeacherLogin';
-import {TeacherDashboard} from './components/components/TeacherDashboard';
+import { useState,type ComponentType } from 'react';
+import { StudentLogin as RawStudentLogin } from './components/components/StudentLogin';
+import { StudentRegister as RawStudentRegister } from './components/components/StudentRegister';
+import { StudentDashboard as RawStudentDashboard } from './components/components/StudentDashboard';
+import { TeacherLogin as RawTeacherLogin } from './components/components/TeacherLogin';
+import { TeacherDashboard as RawTeacherDashboard } from './components/components/TeacherDashboard';
+
+// Named imports को सही JSX Component Type में कास्ट करना
+const StudentLogin = RawStudentLogin as unknown as ComponentType;
+const StudentRegister = RawStudentRegister as unknown as ComponentType;
+const StudentDashboard = RawStudentDashboard as unknown as ComponentType;
+const TeacherLogin = RawTeacherLogin as unknown as ComponentType;
+const TeacherDashboard = RawTeacherDashboard as unknown as ComponentType;
 
 export function App() {
   const [currentView, setCurrentView] = useState('student-login');
-
-  const StudentLoginComp = StudentLogin as any;
-  const StudentRegisterComp = StudentRegister as any;
-  const StudentDashboardComp = StudentDashboard as any;
-  const TeacherLoginComp = TeacherLogin as any;
-  const TeacherDashboardComp = TeacherDashboard as any;
 
   return (
     <div style={{ fontFamily: 'sans-serif' }}>
@@ -42,13 +43,13 @@ export function App() {
         </button>
       </nav>
 
-      {/* सिलेक्टेड पेज */}
+      {/* सिलेक्टेड पेज दिखाने का हिस्सा */}
       <main style={{ padding: '20px' }}>
-        {currentView === 'student-login' && <StudentLoginComp />}
-        {currentView === 'student-register' && <StudentRegisterComp />}
-        {currentView === 'student-dashboard' && <StudentDashboardComp />}
-        {currentView === 'teacher-login' && <TeacherLoginComp />}
-        {currentView === 'teacher-dashboard' && <TeacherDashboardComp />}
+        {currentView === 'student-login' && <StudentLogin />}
+        {currentView === 'student-register' && <StudentRegister />}
+        {currentView === 'student-dashboard' && <StudentDashboard />}
+        {currentView === 'teacher-login' && <TeacherLogin />}
+        {currentView === 'teacher-dashboard' && <TeacherDashboard />}
       </main>
     </div>
   );
